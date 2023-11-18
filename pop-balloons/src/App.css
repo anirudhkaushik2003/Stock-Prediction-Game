@@ -1,0 +1,17 @@
+.red-flash {
+    animation: flashRed 1s;
+}
+
+.green-flash {
+    animation: flashGreen 1s;
+}
+
+@keyframes flashRed {
+    0% {background-color: red;}
+    100% {background-color: transparent;}
+}
+
+@keyframes flashGreen {
+    0% {background-color: green;}
+    100% {background-color: transparent;}
+}
