@@ -2,31 +2,43 @@ import { Button } from "@chakra-ui/button";
 import { Stack, VStack } from "@chakra-ui/layout";
 import { Box } from "@chakra-ui/react";
 import '../App.css'; // import a CSS file where you define your flash animation
-import React, { useState, useEffect } from 'react';
-
-import { FormControl, FormLabel, NumberInput, NumberInputField, NumberDecrementStepper, NumberIncrementStepper, NumberInputStepper } from "@chakra-ui/react";
-
-
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
 import {
-    UPDATE_ASSETS,
-    update_assets
-} from "../store/actions";
-
-interface Props {
-    equation: Array<number | string>;
-}
-
+    FormControl,
+    FormLabel,
+    NumberInput,
+    NumberInputField,
+    NumberDecrementStepper,
+    NumberIncrementStepper,
+    NumberInputStepper
+} from "@chakra-ui/react";
 
 const Trading = () => {
-    const dispatch = useDispatch();
     const [optionsCount, setOptionsCount] = useState(0);
-    const [toggleForm, setToggleForm] = useState(true);
+    const [toggleForm, setToggleForm] = useState(false);
+    const [type, setType] = useState(0);
 
     const handleClick = (type: number) => {
-        setOptionsCount(prevCount => prevCount + 1);
+        if (type === 1 || type === 2) {
+            setToggleForm(true);
+            setType(type);
+        }
     };
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setToggleForm(false);
+        console.log("Amount:", optionsCount);
+        if (type === 1) {
+            // Handle buy logic
+        } else if (type === 2) {
+            // Handle sell logic
+        }
+    };
+
+    const handleAmountChange = (valueAsString: string, valueAsNumber: number) => {
+        setOptionsCount(valueAsNumber);
+    };
 
     return (
         <Box
@@ -54,7 +66,7 @@ const Trading = () => {
                         </Button>
 
                         <Button
-                            key={1}
+                            key={2}
                             colorScheme='teal'
                             height="60px"
                             width="200px"
@@ -64,7 +76,7 @@ const Trading = () => {
                         </Button>
 
                         <Button
-                            key={1}
+                            key={3}
                             colorScheme='teal'
                             height="60px"
                             width="200px"
@@ -73,18 +85,23 @@ const Trading = () => {
                             Hold
                         </Button>
                     </Stack>
-                </VStack>) :
-                (<FormControl isRequired>
-                    <FormLabel>Enter Number of items to trade</FormLabel>
-                    <NumberInput min={1}>
-                        <NumberInputField />
-                        <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                        </NumberInputStepper>
-                    </NumberInput>
-                </FormControl>)
-            }
+                </VStack>
+            ) : (
+                <form onSubmit={handleSubmit}>
+                    <FormControl isRequired>
+                        <FormLabel>Enter Number of items to trade</FormLabel>
+                        <NumberInput min={1} value={optionsCount} onChange={handleAmountChange}>
+                            <NumberInputField />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
+                    </FormControl>
+                    <Button type="submit">Submit</Button>
+
+                </form>
+            )}
         </Box>
     );
 }

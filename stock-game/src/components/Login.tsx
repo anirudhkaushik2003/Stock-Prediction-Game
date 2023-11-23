@@ -1,6 +1,4 @@
-import { Box, Flex, Heading, Kbd, Stack } from "@chakra-ui/react";
 
-import { Formik, Field, Form } from "formik";
 import {
   set_first_name,
   set_last_name,
@@ -14,12 +12,10 @@ import { useDispatch } from "react-redux";
 import {
   Container,
   FormControl,
-  FormErrorMessage,
   FormLabel,
   Input,
   Button,
 } from "@chakra-ui/react";
-import { set } from "lodash";
 
 const Login = () => {
   const [firstName, setFirstName] = useState("");

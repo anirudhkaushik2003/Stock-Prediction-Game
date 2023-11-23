@@ -1,16 +1,10 @@
 import { ChakraProvider, Container, Heading } from "@chakra-ui/react";
 import "./App.css";
 import Game from "./components/Game";
-import Instruction1 from "./components/Instruction1";
-import Instruction2 from "./components/Instruction2";
-import Instruction3 from "./components/Instruction3";
-import Instruction4 from "./components/Instruction4";
-import Instruction5 from "./components/Instruction5";
 import Login from "./components/Login";
 import ThankYou from "./components/ThankYou";
 import { Button, Stack } from "@chakra-ui/react";
 import { IGlobalState } from "./store/reducers";
-import Search from "./components/Search";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -43,6 +37,7 @@ const App = () => {
 
   return (
     <ChakraProvider>
+      <Game />
       {(step === 0  || step === 2 || step === 4 || step === 7 || step === 10) ?
         <Flex justifyContent="space-between" position="fixed" bottom={0}  right={0} p={4}>
           {/* <Button
