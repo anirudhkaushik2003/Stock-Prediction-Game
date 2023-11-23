@@ -3,12 +3,15 @@ import { Stack, VStack } from "@chakra-ui/layout";
 import { Box } from "@chakra-ui/react";
 import '../App.css'; // import a CSS file where you define your flash animation
 import React, { useState, useEffect } from 'react';
-import getEquation from "./Equations";
+
+import { FormControl, FormLabel, NumberInput, NumberInputField, NumberDecrementStepper, NumberIncrementStepper, NumberInputStepper } from "@chakra-ui/react";
+
+
 import { useDispatch, useSelector } from "react-redux";
 import {
     UPDATE_ASSETS,
     update_assets
-  } from "../store/actions";
+} from "../store/actions";
 
 interface Props {
     equation: Array<number | string>;
@@ -16,91 +19,74 @@ interface Props {
 
 
 const Trading = () => {
-
     const dispatch = useDispatch();
+    const [optionsCount, setOptionsCount] = useState(0);
+    const [toggleForm, setToggleForm] = useState(true);
 
-
-    const [Redflash, setRedflash] = useState(false);
-    const [Greenflash, setGreenflash] = useState(false);
-
-
-    const [currentQuestion, setCurrentQuestion] = useState(getEquation());
-    const [answers, setAnswers] = useState(currentQuestion.slice(1));
-    const [question, setQuestion] = useState(currentQuestion[0]);
-    const [correctAnswer, setCorrectAnswer] = useState(currentQuestion[1]);
-
-
-
-    // get remaining elements
-
-
-
-
-    // const handleClick = (ans: number) => {
-    //     setRedflash(ans !== correctAnswer);
-    //     setGreenflash(ans === correctAnswer);
-
-    //     setCurrentQuestion(getEquation());
-
-    //     var newAnswers = currentQuestion.slice(1);
-    //     newAnswers = shuffle(newAnswers);
-    //     setAnswers(newAnswers);
-
-    //     setQuestion(currentQuestion[0]);
-    //     setCorrectAnswer(currentQuestion[1]);
-
-    //     console.log("Reached")
-
-    // };
-
-    const handleClick = (ans: number) => {
-        
+    const handleClick = (type: number) => {
+        setOptionsCount(prevCount => prevCount + 1);
     };
 
 
-    // You can now use equation in your component
     return (
-        // align div center
-        <div className={`App ${Redflash ? 'red-flash' : ''} ${Greenflash ? 'green-flash' : ''}`}>
-            {/* rest of your component */}
-            <Box
-                display='flex'
-                alignItems='center'
-                justifyContent='center'
-                width='100%'
-                py={12}
-                bgPosition='center'
-                bgRepeat='no-repeat'
-                mb={2}
-                className={Redflash ? 'Redflash' : Greenflash ? 'Greenflash' : ''}
-
-            >
+        <Box
+            display='flex'
+            alignItems='center'
+            justifyContent='center'
+            width='100%'
+            py={12}
+            bgPosition='center'
+            bgRepeat='no-repeat'
+            mb={2}
+        >
+            {toggleForm === false ? (
                 <VStack spacing={4} align="center">
-                    <Button colorScheme='yellow' fontSize="50px" height="300px" width="300px"> {question}</Button>
+                    <Button colorScheme='yellow' fontSize="50px" height="300px" width="300px"> </Button>
                     <Stack spacing={4} direction='row' align='center'>
-                        {answers.map((key, index) => (
-                            <Button
-                                key={index}
-                                colorScheme='teal'
-                                height="60px"
-                                width="200px"
-                                onClick={() => handleClick(key as number)}
-                                className={Redflash ? 'Redflash' : Greenflash ? 'Greenflash' : ''}
-                            // add flash animation
-                            >
-                                {key}
-                            </Button>
-                        )
-                        )
-                        }
+                        <Button
+                            key={1}
+                            colorScheme='teal'
+                            height="60px"
+                            width="200px"
+                            onClick={() => handleClick(1)}
+                        >
+                            Buy
+                        </Button>
 
+                        <Button
+                            key={1}
+                            colorScheme='teal'
+                            height="60px"
+                            width="200px"
+                            onClick={() => handleClick(2)}
+                        >
+                            Sell
+                        </Button>
+
+                        <Button
+                            key={1}
+                            colorScheme='teal'
+                            height="60px"
+                            width="200px"
+                            onClick={() => handleClick(3)}
+                        >
+                            Hold
+                        </Button>
                     </Stack>
-                </VStack>
-
-            </Box>
-        </div>
-
+                </VStack>) :
+                (<FormControl isRequired>
+                    <FormLabel>Enter Number of items to trade</FormLabel>
+                    <NumberInput min={1}>
+                        <NumberInputField />
+                        <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                        </NumberInputStepper>
+                    </NumberInput>
+                </FormControl>)
+            }
+        </Box>
     );
-};
+}
 
 export default Trading;

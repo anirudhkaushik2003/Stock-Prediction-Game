@@ -6,7 +6,7 @@ const Game = () => {
 
     return (
         <Container maxW="container.lg" centerContent>
-            <Heading as="h1" size="xl">Basic Maths</Heading>
+            <Heading as="h1" size="xl">Trading</Heading>
             <ScoreCard />
             <Trading />
         </Container>

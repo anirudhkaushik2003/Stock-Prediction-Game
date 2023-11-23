@@ -1,6 +1,8 @@
 import {
   INCREMENT_STEP,
   DECREMENT_STEP,
+  INCREMENT_GLOBAL_STEP,
+  DECREMENT_GLOBAL_STEP,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   CREATE_POST,
@@ -58,6 +60,18 @@ const gameReducer = (state = globalState, action: any) => {
       return {
         ...state,
         assets: state.assets + action.payload,
+      };
+
+    case INCREMENT_GLOBAL_STEP:
+      return {
+        ...state,
+        global_index: state.global_index + 1,
+      };
+
+    case DECREMENT_GLOBAL_STEP:
+      return {
+        ...state,
+        global_index: state.global_index - 1,
       };
 
     case CREATE_POST:

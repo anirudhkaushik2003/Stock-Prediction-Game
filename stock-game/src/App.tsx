@@ -18,8 +18,6 @@ import {
   INCREMENT_STEP,
   decrementStep,
   incrementStep,
-  shuffleModes,
-  SHUFFLE_MODES,
 } from "./store/actions";
 import { Flex } from "@chakra-ui/layout";
 
@@ -45,21 +43,6 @@ const App = () => {
 
   return (
     <ChakraProvider>
-      {step == 0 ? <Instruction1 /> : null}
-      {step == 1 ? <Login/> : null}
-      {step == 2 ? <Instruction2 /> : null}
-      {step == 3 ? <Game /> : null}
-      {step == 4 ? <Instruction3 /> : null}
-      {step == 5 ? <Search /> : null}
-      {step == 6 ? <Game /> : null}
-      {step == 7 ? <Instruction4 /> : null}
-      {step == 8 ? <Search /> : null}
-      {step == 9 ? <Game /> : null}
-      {step == 10 ? <Instruction5 /> : null}
-      {step == 11 ? <Search /> : null}
-      {step == 12 ? <Game /> : null}
-      {step == 13 ? <ThankYou /> : null}
-
       {(step === 0  || step === 2 || step === 4 || step === 7 || step === 10) ?
         <Flex justifyContent="space-between" position="fixed" bottom={0}  right={0} p={4}>
           {/* <Button
