@@ -5,7 +5,6 @@ import '../App.css'; // import a CSS file where you define your flash animation
 import React, { useState, useEffect } from 'react';
 import getEquation from "./Equations";
 import { useDispatch, useSelector } from "react-redux";
-import { IGlobalState } from "../store/reducers";
 import {
     DECREMENT_SCORE,
     INCREMENT_SCORE,
@@ -52,7 +51,6 @@ const TextButtons = () => {
 
 
     // get remaining elements
-    console.log(answers);
 
 
 

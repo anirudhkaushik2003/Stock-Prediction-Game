@@ -23,7 +23,6 @@ import {
   hasSnakeCollided,
   IObjectBody,
 } from "../utils";
-import Instruction from "./Instructions";
 
 export interface ICanvasBoard {
   height: number;
@@ -125,6 +124,8 @@ const CanvasBoard = ({ height, width }: ICanvasBoard) => {
     }
   }, [isConsumed, pos, height, width, dispatch]);
 
+  
+
   useEffect(() => {
     //Draw on canvas each time
     setContext(canvasRef.current && canvasRef.current.getContext("2d"));
@@ -179,7 +180,6 @@ const CanvasBoard = ({ height, width }: ICanvasBoard) => {
         width={width}
         height={height}
       />
-      <Instruction resetBoard={resetBoard} />
     </>
   );
 };
