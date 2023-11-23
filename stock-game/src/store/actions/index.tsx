@@ -16,74 +16,23 @@ export const SET_DIS_DIRECTION = "SET_DIS_DIRECTION";
 
 export const RESET = "RESET";
 export const STOP_GAME = "STOP_GAME";
-export const INCREASE_SNAKE = "INCREASE_SNAKE";
-export const INCREMENT_SCORE = "INCREMENT_SCORE";
-export const DECREMENT_SCORE = "DECREMENT_SCORE";
-export const INCREMENT_OPP_SCORE = "INCREMENT_OPP_SCORE";
-export const DECREMENT_OPP_SCORE = "DECREMENT_OPP_SCORE";
-export const UPDATE_OPP_SCORE = "UPDATE_OPP_SCORE"; 
-
-export const INCREMENT_STEP = 'INCREMENT_STEP';
-export const DECREMENT_STEP = 'DECREMENT_STEP';
-
-
-export const DECREMENT_TIME = 'DECREMENT_TIME';
-export const RESET_TIME = 'RESET_TIME';
-
-export const INCREMENT_MODE_INDEX = 'INCREMENT_MODE_INDEX';
-
-export const SHUFFLE_MODES = 'SHUFFLE_MODES';
-
-export const RESET_SCORE = "RESET_SCORE";
-
-export const SAVE_OPP_SCORE = "SAVE_OPP_SCORE";
-export const SAVE_SCORE = "SAVE_SCORE";
+export const UPDATE_ASSETS = "UPDATE_ASSETS";
 
 export const SET_FIRST_NAME = "SET_FIRST_NAME";
 export const SET_LAST_NAME = "SET_LAST_NAME";
+
+export const INCREMENT_STEP = "INCREMENT_STEP";
+export const DECREMENT_STEP = "DECREMENT_STEP";
 
 
 export const CREATE_POST = "CREATE_POST";
 
 
-export interface ISnakeCoord {
-  x: number;
-  y: number;
-}
-export const makeMove = (dx: number, dy: number, move: string) => ({
-  type: move,
-  payload: [dx, dy]
-});
 
-export const setDisDirection = (direction: string) => ({
-  type: SET_DIS_DIRECTION,
-  payload: direction
-});
-
-export const resetGame = () => ({
-  type: RESET
-});
-
-export const stopGame = () => ({
-  type: STOP_GAME
-});
-
-export const increaseSnake = () => ({
-  type: INCREASE_SNAKE
-});
-
-export const scoreUpdates = (type: string) => ({
+export const assetUpdates = (type: string) => ({
   type
 });
 
-export const decrementTime = () => ({
-  type: DECREMENT_TIME
-});
-
-export const oppScoreUpdates = (type: string, value: number) => ({
-  type,
-  payload: value
-});
 
 export const incrementStep = (type: string) => ({
   type: INCREMENT_STEP
@@ -93,25 +42,6 @@ export const decrementStep = (type: string) => ({
   type: DECREMENT_STEP
 });
 
-export const shuffleModes = (type: string) => ({
-  type: SHUFFLE_MODES
-});
-
-export const resetScore = () => ({
-  type: RESET_SCORE
-});
-
-export const incrementModeIndex = () => ({
-  type: INCREMENT_MODE_INDEX
-});
-
-export const save_opp_score = (type: string) => ({
-  type: SAVE_OPP_SCORE,
-});
-
-export const save_score = (type: string) => ({
-  type: SAVE_SCORE,
-});
 
 export const set_first_name = (type: string, value: string) => ({
   type: SET_FIRST_NAME,
@@ -133,16 +63,7 @@ export const set_last_name = (type: string, value: string) => ({
 export interface IPost {
   firstName: string;
   lastName: string;
-
-  game1: number[];
-  game2: number[];
-  game3: number[];
-  game4: number[];
-  game2_opp: number[];
-  game3_opp: number[];
-  game4_opp: number[];
-
-  modeOrder: number[];
+  days: number[];
 };
 
 export const createPost = (post:  IPost ) => async (dispatch: any) => {
@@ -155,3 +76,9 @@ export const createPost = (post:  IPost ) => async (dispatch: any) => {
     console.log(err);
   }
 };
+
+export const update_assets = (type: string, value: number) => ({
+  type: UPDATE_ASSETS,
+  payload: value
+
+});

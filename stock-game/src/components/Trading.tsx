@@ -6,35 +6,16 @@ import React, { useState, useEffect } from 'react';
 import getEquation from "./Equations";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    DECREMENT_SCORE,
-    INCREMENT_SCORE,
-    RESET_SCORE,
-    scoreUpdates,
+    UPDATE_ASSETS,
+    update_assets
   } from "../store/actions";
 
 interface Props {
     equation: Array<number | string>;
 }
 
-function shuffle(array: Array<number | string>) {
-    let currentIndex = array.length, randomIndex;
 
-    // While there remain elements to shuffle.
-    while (currentIndex > 0) {
-
-        // Pick a remaining element.
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
-}
-
-const TextButtons = () => {
+const Trading = () => {
 
     const dispatch = useDispatch();
 
@@ -73,33 +54,7 @@ const TextButtons = () => {
     // };
 
     const handleClick = (ans: number) => {
-        // Reset flash states
-        setRedflash(false);
-        setGreenflash(false);
-    
-        setTimeout(() => {
-            // Set flash states based on answer
-            setRedflash(ans !== correctAnswer);
-            setGreenflash(ans === correctAnswer);
-
-            // Update score
-            if (ans === correctAnswer) {
-                dispatch(scoreUpdates(INCREMENT_SCORE));
-            } else {
-                dispatch(scoreUpdates(DECREMENT_SCORE));
-            }
-    
-            // Generate new question and answers
-            const newQuestion = getEquation();
-            setCurrentQuestion(newQuestion);
-    
-            var newAnswers = newQuestion.slice(1);
-            newAnswers = shuffle(newAnswers);
-            setAnswers(newAnswers);
-    
-            setQuestion(newQuestion[0]);
-            setCorrectAnswer(newQuestion[1]);
-        }, 100); // Delay of 100ms
+        
     };
 
 
@@ -148,4 +103,4 @@ const TextButtons = () => {
     );
 };
 
-export default TextButtons;
+export default Trading;
